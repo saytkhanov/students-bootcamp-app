@@ -21,5 +21,13 @@ const controller = {
     } catch (e) {
       console.log(e.message)
     }
+  },
+  getStudentById: async (req, res) => {
+    try {
+      const getStudent = await Student.findById(req.params.id)
+      res.status(201).json({ message: "Студент" })
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 }
