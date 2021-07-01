@@ -8,5 +8,13 @@ const controllers = {
     })
     await addStatus.save()
     res.status(201).json({ message: "Cтатус добавлен" })
+  },
+  patchStatus: async (req, res) => {
+    const id = req.params.id;
+    const {type} = req.body.type;
+    const options = {new: true}
+    const patchStatus = await Status.findByIdAndUpdate(id, {type}, options)
+    await patchStatus.save();
+    res.status(201).json({ message: "Cтатус изменен" })
   }
 }
