@@ -29,5 +29,13 @@ const controller = {
     } catch (e) {
       console.log(e.message)
     }
+  },
+  deleteStudent: async (req, res) => {
+    try {
+      const deleteStudent = await Student.findByIdAndDelete(req.params.id)
+      res.status(201).json({ message: "Студен удалён" })
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 }
