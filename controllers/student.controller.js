@@ -9,7 +9,15 @@ const controller = {
         patronymic: req.body.patronymic
       })
       await student.save();
-      res.json(student)
+      res.status(201).json({ message: "Студент добавлен" })
+    } catch (e) {
+      console.log(e.message)
+    }
+  },
+  getAllStudents: async (req, res) => {
+    try {
+      const allStudents  = await Student.find().populate("notes").populate("status");
+      res.status(201).json({ message: "Данные получены" })
     } catch (e) {
       console.log(e.message)
     }
