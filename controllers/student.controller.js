@@ -1,6 +1,6 @@
 const Student = require('../models/Student')
 
-const controller = {
+const controllers = {
   postStudent: async (req, res) => {
     try {
       const student = await new Student({
@@ -50,3 +50,5 @@ const controller = {
     }
   }
 }
+
+module.exports = controllers;

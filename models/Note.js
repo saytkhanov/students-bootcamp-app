@@ -5,7 +5,8 @@ const noteSchema = new Schema({
     text: {
       type: String
     },
-    userStatus: {
+    lastChanges: Date,
+    userId: {
       type: Types.ObjectId,
       ref: 'Student'
     }
