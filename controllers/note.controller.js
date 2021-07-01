@@ -8,5 +8,9 @@ const controllers = {
     })
     await addNote.save();
     res.status(201).json({ message: "Комментарий добавлен" })
-  }
+  },
+  getNoteById: async (req, res) => {
+    const getNoteById = await Note.findById(req.params.id)
+    res.status(201).json({ message: "Комментарии" })
+  },
 }
