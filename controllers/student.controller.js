@@ -37,5 +37,16 @@ const controller = {
     } catch (e) {
       console.log(e.message)
     }
+  },
+  patchStudent: async (req, res) => {
+    try {
+      const {firstName, lastName, patronymic} = req.body;
+      const id = req.params.id;
+      const options = {new: true}
+      const patchStudent = await Student.findByIdAndUpdate(id,{firstName, lastName, patronymic}, options);
+      res.status(201).json({ message: "Студен изменен" })
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 }
