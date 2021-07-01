@@ -18,9 +18,17 @@ const studentSchema = new Schema({
     status: {
       type: Types.ObjectId,
       ref: 'Status'
-    }
+    },
+    notes: {
+     type: Types.ObjectId,
+    ref: 'Note'
+  }
   },
   {
     timestamps: true
   }
 )
+
+const Student = model('Student', studentSchema)
+
+module.exports = Student
