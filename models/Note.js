@@ -1,17 +1,17 @@
-const {Schema, model, Types } = require('mongoose');
+const { Schema, model, Types } = require("mongoose");
 
-
-const noteSchema = new Schema({
+const noteSchema = new Schema(
+  {
     text: String,
     student: {
       type: Types.ObjectId,
-      ref: 'Student'
+      ref: "Student",
     },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
-)
+);
 
-const Note = model('Note', noteSchema);
-module.exports = Note
+const Note = model("Note", noteSchema);
+module.exports = Note;

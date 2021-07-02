@@ -1,25 +1,26 @@
-const { Types } = require('mongoose')
-const {Schema, model} = require('mongoose');
+const { Types } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const statusSchema = new Schema({
+const statusSchema = new Schema(
+  {
     status: {
       type: String,
-      default: "Зачислен"
+      default: "Зачислен",
     },
     color: {
       type: String,
-      default: "grey"
-    }
+      default: "grey",
+    },
     // student: {
     //   type: Types.ObjectId,
     //   ref: 'Student'
     // }
   },
   {
-    timestamps: true
+    timestamps: true,
   }
-)
+);
 
-const Status = model('Status', statusSchema);
+const Status = model("Status", statusSchema);
 
-module.exports = Status
+module.exports = Status;
