@@ -3,7 +3,7 @@ const Note = require("../models/Note");
 const controllers = {
   getAllNote: async (req, res) => {
     try {
-      const getAllNote = await Note.find().populate("student");
+      const getAllNote = await Note.find();
       res.status(201).json(getAllNote);
     } catch (e) {
       console.log(e.message);

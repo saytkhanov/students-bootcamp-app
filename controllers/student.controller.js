@@ -17,7 +17,27 @@ const controllers = {
   },
   getAllStudents: async (req, res) => {
     try {
-      const allStudents = await Student.find();
+      const allStudents = await Student.aggregate([
+        {
+          $lookup: {
+            from: "notes",
+            as: "notes",
+            let: { student: "$_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$student", "$$student"] } } },
+            ],
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            firstName: 1,
+            lastName: 1,
+            patronymic: 1,
+            notes: 1,
+          },
+        },
+      ]);
       res.status(201).json(allStudents);
     } catch (e) {
       console.log(e.message);

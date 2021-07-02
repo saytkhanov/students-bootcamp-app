@@ -14,6 +14,10 @@ const studentSchema = new Schema(
       type: String,
       required: true,
     },
+    note: {
+      type: Types.ObjectId,
+      ref: "Note"
+    },
     status: {
       type: Types.ObjectId,
       ref: "Status",
