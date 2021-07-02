@@ -6,7 +6,8 @@ const controllers = {
       const student = await new Student({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        patronymic: req.body.patronymic
+        patronymic: req.body.patronymic,
+        status: req.params.id
       })
       await student.save();
       res.status(201).json({ message: "Студент добавлен" })
@@ -16,24 +17,24 @@ const controllers = {
   },
   getAllStudents: async (req, res) => {
     try {
-      const allStudents  = await Student.find().populate("notes").populate("status");
-      res.status(201).json({ message: "Данные получены" })
+      const allStudents  = await Student.find()
+      res.status(201).json(allStudents)
     } catch (e) {
       console.log(e.message)
     }
   },
   getStudentById: async (req, res) => {
     try {
-      const getStudent = await Student.findById(req.params.id)
-      res.status(201).json({ message: "Студент" })
+      const getStudent = await Student.findById(req.params._id)
+      res.status(201).json(getStudent)
     } catch (e) {
       console.log(e.message)
     }
   },
   deleteStudent: async (req, res) => {
     try {
-      const deleteStudent = await Student.findByIdAndDelete(req.params.id)
-      res.status(201).json({ message: "Студен удалён" })
+      const deleteStudent = await Student.findByIdAndDelete(req.params._id)
+      res.status(201).json(deleteStudent)
     } catch (e) {
       console.log(e.message)
     }
@@ -41,10 +42,10 @@ const controllers = {
   patchStudent: async (req, res) => {
     try {
       const {firstName, lastName, patronymic} = req.body;
-      const id = req.params.id;
+      const id = req.params._id;
       const options = {new: true}
       const patchStudent = await Student.findByIdAndUpdate(id,{firstName, lastName, patronymic}, options);
-      res.status(201).json({ message: "Студен изменен" })
+      res.status(201).json(patchStudent)
     } catch (e) {
       console.log(e.message)
     }

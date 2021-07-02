@@ -2,14 +2,11 @@ const {Schema, model, Types } = require('mongoose');
 
 
 const noteSchema = new Schema({
-    text: {
-      type: String
-    },
-    lastChanges: Date,
-    userId: {
+    text: String,
+    student: {
       type: Types.ObjectId,
       ref: 'Student'
-    }
+    },
   },
   {
     timestamps: true
