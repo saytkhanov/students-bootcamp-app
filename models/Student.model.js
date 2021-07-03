@@ -14,13 +14,12 @@ const studentSchema = new Schema(
       type: String,
       required: true,
     },
+    avatar: {
+      type: String
+    },
     note: {
       type: Types.ObjectId,
       ref: "Note"
-    },
-    status: {
-      type: Types.ObjectId,
-      ref: "Status",
     },
   },
   {

@@ -1,4 +1,4 @@
-const Student = require("../models/Student");
+const Student = require("../models/Student.model.js");
 
 const controllers = {
   postStudent: async (req, res) => {
@@ -7,7 +7,7 @@ const controllers = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         patronymic: req.body.patronymic,
-        status: req.params.id,
+        avatar: req.body.avatar
       });
       await student.save();
       res.status(201).json({ message: "Студент добавлен" });
@@ -29,14 +29,29 @@ const controllers = {
           },
         },
         {
+          $lookup: {
+            from: "notes",
+            as: "lastNote",
+            let: { student: "$_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$student", "$$student"] } } },
+              { $sort: {createdAt: -1}},
+              {$limit: 1}
+            ],
+          },
+        },
+        {
           $project: {
             _id: 1,
             firstName: 1,
             lastName: 1,
             patronymic: 1,
+            avatar: 1,
             notes: 1,
+            lastNote: 1
           },
         },
+        { $unwind: { path: '$lastNote', preserveNullAndEmptyArrays: true} },
       ]);
       res.status(201).json(allStudents);
     } catch (e) {

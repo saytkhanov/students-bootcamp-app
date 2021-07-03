@@ -1,4 +1,4 @@
-const Status = require("../models/Status");
+const Status = require("../models/Status.model.js");
 
 const controllers = {
   getStatuses: async (req, res) => {
@@ -8,8 +8,8 @@ const controllers = {
   addStatus: async (req, res) => {
     try {
       const addStatus = await new Status({
-        type: req.body.type,
-        userId: req.params.id,
+        status: req.body.status,
+        color: req.body.color
       });
       await addStatus.save();
       res.status(201).json({ message: "Статус добавлен" });

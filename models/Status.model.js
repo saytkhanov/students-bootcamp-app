@@ -1,20 +1,15 @@
-const { Types } = require("mongoose");
 const { Schema, model } = require("mongoose");
 
 const statusSchema = new Schema(
   {
     status: {
       type: String,
-      default: "Зачислен",
+      default: "Принят",
     },
     color: {
       type: String,
-      default: "grey",
-    },
-    // student: {
-    //   type: Types.ObjectId,
-    //   ref: 'Student'
-    // }
+      default: '',
+    }
   },
   {
     timestamps: true,

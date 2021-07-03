@@ -1,4 +1,4 @@
-const Note = require("../models/Note");
+const Note = require("../models/Note.model.js");
 
 const controllers = {
   getAllNote: async (req, res) => {
@@ -13,6 +13,7 @@ const controllers = {
     try {
       const addNote = await new Note({
         text: req.body.text,
+        status: req.body.status,
         student: req.params.id,
       });
       await addNote.save();
@@ -23,7 +24,7 @@ const controllers = {
   },
   getNoteById: async (req, res) => {
     try {
-      const getNoteById = await Note.find({ student: req.params.id });
+      const getNoteById = await Note.find({ student: req.params.id }).populate("student");
       res.status(201).json(getNoteById);
     } catch (e) {
       console.log(e.message);

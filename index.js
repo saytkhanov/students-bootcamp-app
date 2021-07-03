@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const morgan = require('morgan');
 const routes = require("./routes/index");
 require("dotenv").config();
+
 
 const app = express();
 
@@ -11,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
+app.use(morgan("combined"));
 
 const start = async () => {
   try {
