@@ -1,16 +1,14 @@
 const Student = require("../models/Student.model.js");
 
-const controllers = {
+module.exports.studentsController = {
   postStudent: async (req, res) => {
     try {
+      const {firstName, lastName, patronymic, avatar} = req.body
       const student = await new Student({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        patronymic: req.body.patronymic,
-        avatar: req.body.avatar
+        firstName, lastName, patronymic, avatar
       });
       await student.save();
-      res.status(201).json({ message: "Студент добавлен" });
+      res.json(student);
     } catch (e) {
       console.log(e.message);
     }
@@ -35,8 +33,8 @@ const controllers = {
             let: { student: "$_id" },
             pipeline: [
               { $match: { $expr: { $eq: ["$student", "$$student"] } } },
-              { $sort: {createdAt: -1}},
-              {$limit: 1}
+              { $sort: { createdAt: -1 } },
+              { $limit: 1 },
             ],
           },
         },
@@ -48,28 +46,28 @@ const controllers = {
             patronymic: 1,
             avatar: 1,
             notes: 1,
-            lastNote: 1
+            lastNote: 1,
           },
         },
-        { $unwind: { path: '$lastNote', preserveNullAndEmptyArrays: true} },
+        { $unwind: { path: "$lastNote", preserveNullAndEmptyArrays: true } },
       ]);
-      res.status(201).json(allStudents);
+      res.json(allStudents);
     } catch (e) {
       console.log(e.message);
     }
   },
   getStudentById: async (req, res) => {
     try {
-      const getStudent = await Student.findById(req.params._id);
-      res.status(201).json(getStudent);
+      const getStudent = await Student.findById(req.params.id);
+      res.json(getStudent);
     } catch (e) {
       console.log(e.message);
     }
   },
   deleteStudent: async (req, res) => {
     try {
-      const deleteStudent = await Student.findByIdAndDelete(req.params._id);
-      res.status(201).json(deleteStudent);
+      const deleteStudent = await Student.findByIdAndDelete(req.params.id);
+      res.json(deleteStudent);
     } catch (e) {
       console.log(e.message);
     }
@@ -77,18 +75,18 @@ const controllers = {
   patchStudent: async (req, res) => {
     try {
       const { firstName, lastName, patronymic } = req.body;
-      const id = req.params._id;
+      const id = req.params.id;
       const options = { new: true };
       const patchStudent = await Student.findByIdAndUpdate(
         id,
         { firstName, lastName, patronymic },
         options
       );
-      res.status(201).json(patchStudent);
+      res.json(patchStudent);
     } catch (e) {
       console.log(e.message);
     }
   },
 };
 
-module.exports = controllers;
+

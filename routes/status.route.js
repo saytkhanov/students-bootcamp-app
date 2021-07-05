@@ -1,13 +1,11 @@
 const { Router } = require("express");
 const router = Router();
 const {
-  addStatus,
-  patchStatus,
-  getStatuses,
-} = require("../controllers/status.controller");
+  statusController,
+} = require('../controllers/status.controller')
 
-router.get("/status", getStatuses);
-router.post("/status", addStatus);
-router.patch("/status/:id", patchStatus);
+router.get("/status", statusController.getStatuses);
+router.post("/status", statusController.addStatus);
+router.patch("/status/:id", statusController.patchStatus);
 
 module.exports = router;

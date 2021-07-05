@@ -1,18 +1,22 @@
 const Status = require("../models/Status.model.js");
 
-const controllers = {
+module.exports.statusController = {
   getStatuses: async (req, res) => {
-    const allStatuses = await Status.find();
-    res.status(201).json(allStatuses);
+    try {
+      const allStatuses = await Status.find();
+      res.json(allStatuses);
+    } catch (e) {
+      console.log(e.message)
+    }
   },
   addStatus: async (req, res) => {
     try {
+      const {status, color} = req.body
       const addStatus = await new Status({
-        status: req.body.status,
-        color: req.body.color
+       status, color
       });
       await addStatus.save();
-      res.status(201).json({ message: "Статус добавлен" });
+      res.json(addStatus);
     } catch (e) {
       console.log(e.message);
     }
@@ -28,11 +32,11 @@ const controllers = {
         options
       );
       await patchStatus.save();
-      res.status(201).json({ message: "Статус изменен" });
+      res.json(patchStatus);
     } catch (e) {
       console.log(e.message);
     }
   },
 };
 
-module.exports = controllers;
+

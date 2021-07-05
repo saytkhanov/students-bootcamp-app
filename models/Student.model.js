@@ -4,15 +4,15 @@ const studentSchema = new Schema(
   {
     firstName: {
       type: String,
-      required: true,
+      required: true
     },
     lastName: {
       type: String,
-      required: true,
+      required: true
     },
     patronymic: {
       type: String,
-      required: true,
+      required: true
     },
     avatar: {
       type: String
