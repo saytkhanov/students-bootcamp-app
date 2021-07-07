@@ -1,3 +1,4 @@
+const httpStatus = require('http-status')
 const Status = require("../models/Status.model.js");
 
 module.exports.statusController = {
@@ -6,19 +7,28 @@ module.exports.statusController = {
       const allStatuses = await Status.find();
       res.json(allStatuses);
     } catch (e) {
-      console.log(e.message)
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({
+        error: e.message,
+      })
     }
   },
   addStatus: async (req, res) => {
+    const {status, color} = req.body;
+    if (!status) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        error: 'Необходимо указать статус',
+      });
+    }
     try {
-      const {status, color} = req.body
       const addStatus = await new Status({
        status, color
       });
       await addStatus.save();
       res.json(addStatus);
     } catch (e) {
-      console.log(e.message);
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({
+        error: e.message,
+      });
     }
   },
   patchStatus: async (req, res) => {
@@ -34,7 +44,9 @@ module.exports.statusController = {
       await patchStatus.save();
       res.json(patchStatus);
     } catch (e) {
-      console.log(e.message);
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({
+        error: e.message,
+      });
     }
   },
 };

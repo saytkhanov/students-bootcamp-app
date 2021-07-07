@@ -1,9 +1,30 @@
+const httpStatus = require('http-status')
 const Student = require("../models/Student.model.js");
 
 module.exports.studentsController = {
   postStudent: async (req, res) => {
+    const {firstName, lastName, patronymic, avatar} = req.body;
+    if (!firstName) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        error: 'Необходимо указать имя нового студента',
+      });
+    }
+    if (!lastName) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        error: 'Необходимо указать фамилию нового студента',
+      });
+    }
+    if (!patronymic) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        error: 'Необходимо указать отчество нового студента',
+      });
+    }
+    if (!avatar) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        error: 'Необходимо указать ссылку на аватарку',
+      });
+    }
     try {
-      const {firstName, lastName, patronymic, avatar} = req.body
       const student = await new Student({
         firstName, lastName, patronymic, avatar
       });
@@ -59,6 +80,11 @@ module.exports.studentsController = {
   getStudentById: async (req, res) => {
     try {
       const getStudent = await Student.findById(req.params.id);
+      if (!getStudent) {
+        return res.status(httpStatus.BAD_REQUEST).json({
+          error: 'Студент с таким ID не найден',
+        })
+      }
       res.json(getStudent);
     } catch (e) {
       console.log(e.message);
@@ -67,9 +93,14 @@ module.exports.studentsController = {
   deleteStudent: async (req, res) => {
     try {
       const deleteStudent = await Student.findByIdAndDelete(req.params.id);
+      if (!deleteStudent) {
+        return res.json({
+          message: 'Не удалось удалить студента. Укажите верный ID',
+        });
+      }
       res.json(deleteStudent);
     } catch (e) {
-      console.log(e.message);
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({ error: e.message })
     }
   },
   patchStudent: async (req, res) => {
@@ -84,7 +115,9 @@ module.exports.studentsController = {
       );
       res.json(patchStudent);
     } catch (e) {
-      console.log(e.message);
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({
+        error: e.message,
+      });
     }
   },
 };

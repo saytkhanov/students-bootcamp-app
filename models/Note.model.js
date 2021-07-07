@@ -2,7 +2,9 @@ const { Schema, model, Types } = require("mongoose");
 
 const noteSchema = new Schema(
   {
-    text: String,
+    text: {
+      type: String
+    },
     student: {
       type: Types.ObjectId,
       ref: "Student"

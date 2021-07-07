@@ -3,12 +3,10 @@ const { Schema, model } = require("mongoose");
 const statusSchema = new Schema(
   {
     status: {
-      type: String,
-      default: "Принят",
+      type: String
     },
     color: {
-      type: String,
-      default: '',
+      type: String
     }
   },
   {

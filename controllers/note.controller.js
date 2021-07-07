@@ -1,3 +1,4 @@
+const httpStatus = require('http-status')
 const Note = require("../models/Note.model.js");
 
 module.exports.notesController = {
@@ -6,19 +7,28 @@ module.exports.notesController = {
       const getAllNote = await Note.find();
       res.json(getAllNote);
     } catch (e) {
-      console.log(e.message);
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({
+        error: e.message,
+      });
     }
   },
   addNote: async (req, res) => {
+    const {text, status} = req.body;
+    if (!status) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        error: 'Необходимо выбрать статус студента',
+      });
+    }
     try {
-      const {text, status, student} = req.body
       const addNote = await new Note({
-        text, status, student
+        text, status, student: req.params.id
       });
       await addNote.save();
       res.json(addNote);
     } catch (e) {
-      console.log(e.message);
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({
+        error: e.message,
+      });
     }
   },
   getNoteById: async (req, res) => {
@@ -26,26 +36,39 @@ module.exports.notesController = {
       const getNoteById = await Note.find({ student: req.params.id });
       res.json(getNoteById);
     } catch (e) {
-      console.log(e.message);
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({
+        error: e.message,
+      });
     }
   },
   patchNote: async (req, res) => {
+    const id = req.params.id;
+    const { text, status } = req.body;
+    const options = { new: true };
     try {
-      const id = req.params.id;
-      const { text, status } = req.body;
-      const options = { new: true };
       const patchNote = await Note.findByIdAndUpdate(id, { text, status }, options);
       res.json(patchNote);
     } catch (e) {
-      console.log(e.message);
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).json({
+        error: e.message,
+      });
     }
   },
   deleteNote: async (req, res) => {
     try {
       const deleteNote = await Note.findByIdAndDelete(req.params.id);
-      res.json(deleteNote);
+      if (!deleteNote) {
+        return res.json({
+          message: 'Не удалось удалить запись. Укажите верный ID',
+        });
+      }
+      return res.json({
+        message: 'Запись успешно удалена',
+      });
     } catch (e) {
-      console.log(e.message);
+      return res
+        .status(httpStatus.SERVICE_UNAVAILABLE)
+        .json({ error: e.message });
     }
   },
 };
