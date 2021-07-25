@@ -2,7 +2,6 @@
   "name": "students_bd",
   "version": "1.0.0",
   "description": "",
-  "browserslist": "> 0.25%, not dead",
   "eslintConfig": {
     "extends": [
       "airbnb",
@@ -11,8 +10,11 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index",
-    "dev": "node index"
+    "server": "nodemon index",
+    "client": "cd ./client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +28,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "concurrently": "^6.2.0",
     "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",

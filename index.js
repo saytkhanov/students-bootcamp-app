@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require('path')
 const morgan = require('morgan');
 const routes = require("./routes/index");
 require("dotenv").config();
@@ -14,6 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 app.use(morgan("combined"));
+app.use(express.static(path.resolve(__dirname, 'client', 'build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+})
 
 const start = async () => {
   try {
