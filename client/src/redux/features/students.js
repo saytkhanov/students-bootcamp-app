@@ -55,7 +55,7 @@ export const loadStudents = () => {
   return async (dispatch) => {
     dispatch({ type: "students/load/pending" });
    try {
-     const response = await fetch(`http://localhost:3004/`);
+     const response = await fetch(`/`);
      const json = await response.json();
      dispatch({
        type: "students/load/fulfilled",
@@ -70,7 +70,7 @@ export const loadStudents = () => {
 export const createStudent = (data) => {
   return async (dispatch) => {
     dispatch({ type: "students/create/pending" });
-    const response = await fetch("http://localhost:3004/", {
+    const response = await fetch("/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -88,7 +88,7 @@ export const createStudent = (data) => {
 export const deleteStudent = (id) => {
   return async (dispatch) => {
     dispatch({ type: "students/remove/pending" });
-    await fetch(`http://localhost:3004/student/${id}`, {
+    await fetch(`/student/${id}`, {
       method: "DELETE",
     });
     dispatch({

@@ -45,7 +45,7 @@ export const loadStatuses = () => {
   return async (dispatch) => {
    try {
      dispatch({type: "statuses/load/pending" })
-     const response = await fetch(`http://localhost:3004/status`)
+     const response = await fetch(`/status`)
      const json = await response.json();
      dispatch({
        type:"statuses/load/fulfilled",
@@ -60,7 +60,7 @@ export const loadStatuses = () => {
 export const postStatus = (data) => {
   return async (dispatch) => {
     dispatch({type: "statuses/create/pending" });
-    const response = await fetch('http://localhost:3004/status',
+    const response = await fetch('/status',
         {
           method: "POST",
           headers: {

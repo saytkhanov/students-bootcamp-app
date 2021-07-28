@@ -65,7 +65,7 @@ export const loadNotes = (id) => {
   return async (dispatch) => {
     dispatch({type: "notes/load/pending" })
     try {
-      const response = await fetch(`http://localhost:3004/student/${id}/note`)
+      const response = await fetch(`/student/${id}/note`)
       const json = await response.json();
       dispatch({
         type: "notes/load/fulfilled",
@@ -80,7 +80,7 @@ export const loadNotes = (id) => {
 export const editNote = (id, data) => {
   return async (dispatch) => {
     dispatch({type: "notes/edit/pending" });
-      await fetch(`http://localhost:3004/note/${id}`,
+      await fetch(`/note/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -98,7 +98,7 @@ export const editNote = (id, data) => {
 export const postNote = (id, data) => {
   return async (dispatch) => {
     dispatch({type: "notes/create/pending" });
-    const response = await fetch(`http://localhost:3004/student/${id}/note`,
+    const response = await fetch(`/student/${id}/note`,
       {
         method: "POST",
         headers: {
