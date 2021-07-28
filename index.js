@@ -14,11 +14,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, 'client', 'build')))
+app.use(routes);
+app.use(morgan("combined"));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
 })
-app.use(routes);
-app.use(morgan("combined"));
 
 const start = async () => {
   try {
