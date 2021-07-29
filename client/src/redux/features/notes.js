@@ -65,7 +65,7 @@ export const loadNotes = (id) => {
   return async (dispatch) => {
     dispatch({type: "notes/load/pending" })
     try {
-      const response = await fetch(`/student/${id}/note`)
+      const response = await fetch(`/student/${id}/notes`)
       const json = await response.json();
       dispatch({
         type: "notes/load/fulfilled",

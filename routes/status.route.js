@@ -4,7 +4,7 @@ const {
   statusController,
 } = require('../controllers/status.controller')
 
-router.get("/status", statusController.getStatuses);
+router.get("/statuses", statusController.getStatuses);
 router.post("/status", statusController.addStatus);
 router.patch("/status/:id", statusController.patchStatus);
 
