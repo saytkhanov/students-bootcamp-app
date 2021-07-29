@@ -20,6 +20,10 @@ cd ..
 npm run dev
 ```
 
+![gif](https://github.com/saytkhanov/students-bootcamp-app/blob/main/img.gif)
+___
+![gif](https://github.com/saytkhanov/students-bootcamp-app/blob/main/img2.gif)
+
 [comment]: <> (###Технологии проекта)
 
 [comment]: <> (____)
