@@ -19,6 +19,8 @@ cd ..
 ```
 npm run dev
 ```
+___
+Внешний вид проекта:
 
 ![gif](https://github.com/saytkhanov/students-bootcamp-app/blob/main/img.gif)
 ___
