@@ -21,7 +21,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
 })
 
-const { PORT } = process.env.PORT || 4004
+const { PORT }  = process.env || 4004
 
 const start = async () => {
   try {
