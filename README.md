@@ -21,9 +21,10 @@ npm run dev
 ```
 ___
 ### Внешний вид проекта:
-
+#### основная страница, поиск и заметки выбранного студента, добавление записи и выбор статуса
 ![gif](https://github.com/saytkhanov/students-bootcamp-app/blob/main/img.gif)
 ___
+#### переключение на админку, добавление студента, статуса, и удаления
 ![gif](https://github.com/saytkhanov/students-bootcamp-app/blob/main/img2.gif)
 
 [comment]: <> (###Технологии проекта)
@@ -43,7 +44,12 @@ ___
     - Добавление и изменение статусов
     - Удаление студентов
 ____
-
+### Следующие шаги:
+- Возможность добавления заданий для студентов
+- фильтрация по всем параметрам
+- авторизация и регистрация
+- возможность записаться на курсы при помощи заполнения заявки
+___
 ### Что я использовал:
 - ![HTML](https://img.shields.io/badge/HTML-orange?style=flat-square&logo=HTML5)
   ![CSS](https://img.shields.io/badge/CSS-blue?style=flat-square&logo=css3)
