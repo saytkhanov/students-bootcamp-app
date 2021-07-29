@@ -63,7 +63,7 @@ ____
    ![Node.js](https://img.shields.io/badge/Node.js-blue?style=flat-square&logo=Node.js)
    ![Express](https://img.shields.io/badge/Express-red?style=flat-square&logo=Express)
    ![MongoDB](https://img.shields.io/badge/MongoDB-red?style=flat-square&logo=MongoDB)
-- ![react-router-dom](https://img.shields.io/badge/react-router-dom-red?style=flat-square&logo=react-router-dom)
+- ![react-router-dom](https://img.shields.io/badge/-react-router-dom-orange)
   ![dayjs](https://img.shields.io/badge/-dayjs-orange)
   ![concurrently](https://img.shields.io/badge/-concurrently-black)
   ![fuse-js](https://img.shields.io/badge/-fuse--JS-yellow)
