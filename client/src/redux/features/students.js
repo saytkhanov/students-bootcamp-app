@@ -70,7 +70,7 @@ export const loadStudents = () => {
 export const createStudent = (data) => {
   return async (dispatch) => {
     dispatch({ type: "students/create/pending" });
-    const response = await fetch("https://localhost:3004/student", {
+    const response = await fetch("/student", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
